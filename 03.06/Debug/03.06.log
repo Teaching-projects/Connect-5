@@ -1,0 +1,17 @@
+﻿  Jatek.cpp
+c:\users\oliver\desktop\connect-5\03.06\jatek.hpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(36): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(61): warning C4244: 'argument': conversion from 'double' to 'std::streamsize', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(72): warning C4244: 'argument': conversion from 'double' to 'std::streamsize', possible loss of data
+  Main.cpp
+c:\users\oliver\desktop\connect-5\03.06\jatek.hpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(23): warning C4101: 'wait2': unreferenced local variable
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(22): warning C4101: 'wait': unreferenced local variable
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(17): warning C4101: 'y': unreferenced local variable
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(89): warning C4101: 'wait2': unreferenced local variable
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(88): warning C4101: 'wait': unreferenced local variable
+  Generating Code...
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(223): warning C4715: 'nehezseg': not all control paths return a value
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(78): warning C4715: 'tablameret': not all control paths return a value
+  03.06.vcxproj -> C:\Users\Oliver\Desktop\Connect-5\Debug\03.06.exe
