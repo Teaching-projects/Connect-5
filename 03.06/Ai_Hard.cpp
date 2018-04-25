@@ -1,6 +1,6 @@
 #include "Ai_Hard.hpp"
 
-Ai_Hard::Ai_Hard():Ai() {
+Ai_Hard::Ai_Hard():Player() {
 	
 }
 int* Ai_Hard::nextmove() {

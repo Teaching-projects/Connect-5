@@ -1,9 +1,8 @@
 #ifndef AI_EASY_HPP
 #define AI_EASY_HPP
-#include "Ai.hpp"
+#include "Player.hpp"
 
-class Ai_Easy : public Ai {
-	int* laststeps;
+class Ai_Easy : public Player {
 public:
 	Ai_Easy();
 	int* nextmove()override;

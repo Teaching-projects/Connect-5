@@ -10,6 +10,17 @@ bool PvP(int size);
 int nehezseg();
 
 int main(){
+	/*
+	Player* p1;
+	Player* p2;
+
+	p1 = new User;
+	p2 = new Ai_Easy;
+
+	std::cout<< (p1->get_laststeps())[0];
+	std::cout << (p1->get_laststeps())[0];
+	*/
+
 
 	menu();
 	return 0;
@@ -86,35 +97,35 @@ bool PvAi(int size,int diff){
 	int x;
 	int y;
 	int *move = new int[2];
-	Jatek jatek;
+	Jatek *jatek;
 
 	if (diff == 1) {
-		jatek=Jatek(size,"PvAi",1);
+		jatek=new Jatek(size,"PvAi",1);
 	}
-	else if (diff == 2) {
-		jatek=Jatek(size, "PvAi", 2);
+	else if (diff==2){
+		jatek = new Jatek(size, "PvAi", 2);
 	}
 
 
-	jatek.fancyPrint();
-	while (!jatek.isGameOver() && !ok){
-		if (jatek.isXkov()) std::cout << "\nX következik: \n";
-		jatek.aiMove(diff);
+	jatek->fancyPrint();
+	while (!jatek->isGameOver() && !ok){
+		if (jatek->isXkov()) std::cout << "\nX következik: \n";
+		jatek->aiMove(diff);
 		system(CLEAR);
-		jatek.fancyPrint();
-		if (jatek.isFinished()){
+		jatek->fancyPrint();
+		if (jatek->isFinished()){
 			ok = true;
 			std::cout << "\nX nyert!!!\n";
 		}
 		else{
 			do{
 				std::cout << "\nO következik: ";
-				if (move = jatek.getPlayer(2)->nextmove()) {
-					if (jatek.getMove(move[0], move[1])) {
+				if (move = jatek->getPlayer(2)->nextmove()) {
+					if (jatek->getMove(move[0], move[1])) {
 						good = true;
 						system(CLEAR);
-						jatek.fancyPrint();
-						if (jatek.isFinished()) {
+						jatek->fancyPrint();
+						if (jatek->isFinished()) {
 							ok = true;
 							std::cout << "\nO nyert!!!\n";
 						}

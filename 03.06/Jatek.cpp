@@ -43,7 +43,15 @@ Jatek::Jatek(int size, std::string flag,int diff):size(size) {
 	}
 }
 
+Jatek::Jatek(const Jatek& j) {
+	tabla = j.tabla;
+	p1 = j.p1;
+	p2 = j.p2;
+}
+
 Jatek::~Jatek(){
+	delete p1;
+	delete p2;
 	delete tabla;
 }
 

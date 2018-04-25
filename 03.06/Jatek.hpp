@@ -30,6 +30,7 @@ public:
 	Jatek();
 	Jatek(int size);
 	Jatek(int size, std::string flag,int diff);
+	Jatek(const Jatek& j);
 	~Jatek();
 	Player* getPlayer(int number) const;
 	void fancyPrint() const;
@@ -37,8 +38,6 @@ public:
 	bool isValidMove(int x, int y) const;
 	bool isGameOver() const;
 	bool isFinished() const;
-	void resizeRight();
-	void resizeLeft();
 	int getResult(int x, int y,int diff);
 	void aiMove(int diff);
 	int getDefence(int x, int y);
