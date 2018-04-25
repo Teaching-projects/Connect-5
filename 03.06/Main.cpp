@@ -1,4 +1,8 @@
 #include "Jatek.hpp"
+#include "Ai_Easy.hpp"
+#include "Ai_Hard.hpp"
+#include "User.hpp"
+#include <vector>
 
 void menu();
 int tablameret();
@@ -7,7 +11,16 @@ bool PvP(int size);
 int nehezseg();
 
 int main(){
-	menu();
+	std::vector <Player *> lista;
+	User p = User();
+	Ai_Hard ai = Ai_Hard();
+	lista.push_back(&ai);
+	lista.push_back(&p);
+	std::cout << *(lista[0]->nextmove());
+	std::cout << *(lista[1]->nextmove());
+
+
+	//menu();
 	return 0;
 }
 
