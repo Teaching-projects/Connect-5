@@ -1,16 +1,7 @@
 #include "Jatek.hpp"
 
 Jatek::Jatek():size(10),tabla(NULL){
-	tabla = new int*[size];
-	for (int i = 0; i < size; i++){
-		tabla[i] = new int[size];
-	}
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
-			tabla[i][j] = 0;
-		}
-	}
-	xkov = true;
+	tabla = new Tabla(10);
 	lastx[0] = -1;
 	lastx[1] = -1;
 	lasty[0] = -1;
@@ -19,16 +10,7 @@ Jatek::Jatek():size(10),tabla(NULL){
 }
 
 Jatek::Jatek(int size):size(size){
-	tabla = new int*[size];
-	for (int i = 0; i < size; i++){
-		tabla[i] = new int[size];
-	}
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
-			tabla[i][j] = 0;
-		}
-	}
-	xkov = true;
+	tabla = new Tabla(size);
 	lastx[0] = -1;
 	lastx[1] = -1;
 	lasty[0] = -1;
@@ -36,17 +18,8 @@ Jatek::Jatek(int size):size(size){
 	srand(time(NULL));
 }
 
-Jatek::Jatek(int size, std::string flag):size(size) {
-	tabla = new int*[size];
-	for (int i = 0; i < size; i++) {
-		tabla[i] = new int[size];
-	}
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; j++) {
-			tabla[i][j] = 0;
-		}
-	}
-	xkov = true;
+Jatek::Jatek(int size, std::string flag,int diff):size(size) {
+	tabla = new Tabla(size);
 	srand(time(NULL));
 
 	if (flag == "Pvp") {
@@ -55,62 +28,63 @@ Jatek::Jatek(int size, std::string flag):size(size) {
 		p1->set_laststeps(-1, -1);
 		p2->set_laststeps(-1, -1);
 	}
+
+	if (flag == "PvAi") {
+		if (diff == 1) {
+			p1 = new Ai_Easy;
+			p2 = new User;
+		}
+		else if (diff == 2) {
+			p1 = new Ai_Hard;
+			p2 = new User;
+		}
+		p1->set_laststeps(-1, -1);
+		p2->set_laststeps(-1, -1);
+	}
 }
 
 Jatek::~Jatek(){
-	for (int i = 0; i < size; i++){
-		delete(tabla[i]);
-	}
 	delete tabla;
-}
-
-void Jatek::print() const{
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
-			std::cout << tabla[i][j]<<" ";
-		}
-		std::cout << "\n";
-	}
 }
 
 void Jatek::fancyPrint() const{
 	std::cout << "| - ";
-	for (int i = 0; i < size; i++){
+	for (int i = 0; i < tabla->getSize(); i++){
 		std::cout << "| " << std::setfill(' ')<< std::setw(2) << i;
 	}
 	std::cout << "|\n";
-	std::cout << std::setfill('-')<<std::setw(size*4.5)<< "\n";
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
+	std::cout << std::setfill('-')<<std::setw(tabla->getSize()*4.5)<< "\n";
+	for (int i = 0; i < tabla->getSize(); i++){
+		for (int j = 0; j < tabla->getSize(); j++){
 			if (j == 0) {
-				std::cout << "|"<<std::setfill(' ')<<std::setw(2) << i << " | " << (tabla[i][j]==1 ? 'X': tabla[i][j]==2 ? 'O':' ' );
+				std::cout << "|"<<std::setfill(' ')<<std::setw(2) << i << " | " << ((tabla->getTabla())[i][j]==1 ? 'X': (tabla->getTabla())[i][j]==2 ? 'O':' ' );
 			}
 			else{
-				std::cout << " | " << (tabla[i][j] == 1 ? 'X' : tabla[i][j] == 2 ? 'O' : ' ');
+				std::cout << " | " << ((tabla->getTabla())[i][j] == 1 ? 'X' : (tabla->getTabla())[i][j] == 2 ? 'O' : ' ');
 			}
 		}
 		std::cout << " |\n";
-		std::cout << std::setfill('-') << std::setw(size*4.5) << "\n";
+		std::cout << std::setfill('-') << std::setw(tabla->getSize()*4.5) << "\n";
 	}
 }
 
 bool Jatek::getMove(int x, int y){
 	if (isValidMove(x, y)){
-		if (isXkov()){
-			tabla[x][y] = 1;
+		if (tabla->isXkov()){
+			(tabla->getTabla())[x][y] = 1;
 			p1->set_laststeps(x, y);
-			setXkov();
+			tabla->setXkov();
 		}
 		else{
-			tabla[x][y] = 2;
+			(tabla->getTabla())[x][y] = 2;
 			p2->set_laststeps(x, y);
-			setXkov();
+			tabla->setXkov();
 		}
-		if ((x == size - 1 || y == size - 1) && size<17){
-			resizeRight();
+		if (((x == (tabla->getSize()) - 1) || y == (tabla->getSize()-1)) && tabla->getSize()<17){
+			tabla->resizeRight();
 		}
-		if ((x == 0 || y == 0) && size<17){
-			resizeLeft();
+		if ((x == 0 || y == 0) && tabla->getSize()<17){
+			tabla->resizeLeft();
 		}
 		return true;
 	}
@@ -119,27 +93,18 @@ bool Jatek::getMove(int x, int y){
 }
 
 bool Jatek::isValidMove(int x, int y) const{
-	if (x < 0 || x>size-1 || y < 0 || y>size-1) return false;
-	else if (tabla[x][y]!=0) return false;
+	if (x < 0 || x>tabla->getSize()-1 || y < 0 || y>tabla->getSize()-1) return false;
+	else if ((tabla->getTabla())[x][y]!=0) return false;
 	else return true;
 }
 
 bool Jatek::isGameOver() const {
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
-			if (tabla[i][j]==0) return false;
+	for (int i = 0; i < tabla->getSize(); i++){
+		for (int j = 0; j < tabla->getSize(); j++){
+			if ((tabla->getTabla())[i][j]==0) return false;
 		}
 	}
 	return true;
-}
-
-bool Jatek::isXkov() const{
-	return xkov;
-}
-
-void Jatek::setXkov(){
-	if (isXkov()) xkov = false;
-	else xkov = true;
 }
 
 bool Jatek::isFinished() const{
@@ -148,7 +113,7 @@ bool Jatek::isFinished() const{
 	int szam;
 	int db = 0;
 
-	if (isXkov()){
+	if (tabla->isXkov()){
 		tmpx = (p2->get_laststeps())[0];
 		tmpy = (p2->get_laststeps())[1];
 		szam = 2;
@@ -162,8 +127,8 @@ bool Jatek::isFinished() const{
 	if (tmpx != -1){
 		/*függõleges*/
 		db = 0;
-		for (int i = 0; i < size-1; i++){
-			if (tabla[i][tmpy] == szam) db++;
+		for (int i = 0; i < tabla->getSize()-1; i++){
+			if ((tabla->getTabla())[i][tmpy] == szam) db++;
 			else if (db != 5){
 				db = 0;
 			}
@@ -174,8 +139,8 @@ bool Jatek::isFinished() const{
 
 		/*vízszintes*/
 		db = 0;
-		for (int i = 0; i < size-1; i++){
-			if (tabla[tmpx][i] == szam) db++;
+		for (int i = 0; i < tabla->getSize()-1; i++){
+			if ((tabla->getTabla())[tmpx][i] == szam) db++;
 			else if (db != 5){
 				db = 0;
 			}
@@ -189,14 +154,14 @@ bool Jatek::isFinished() const{
 		db = 0;
 		int i = tmpx;
 		int j = tmpy;
-		while (i>0 && j>0 && tabla[i - 1][j - 1] == szam){
+		while (i>0 && j>0 && (tabla->getTabla())[i - 1][j - 1] == szam){
 			i--;
 			j--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == szam){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == szam){
 				db++;
 			}
 			else if (db != 5){
@@ -214,12 +179,12 @@ bool Jatek::isFinished() const{
 		db = 0;
 		i = tmpx;
 		j = tmpy;
-		while (i>0 && i<size-1 && j>0 && j<size-1 && tabla[i - 1][j + 1] == szam){
+		while (i>0 && i<tabla->getSize()-1 && j>0 && j<tabla->getSize()-1 && (tabla->getTabla())[i - 1][j + 1] == szam){
 			i--;
 			j++;
 		}
-		while (db < 5 && i < size && j>=0){
-			if (tabla[i][j] == szam){
+		while (db < 5 && i < tabla->getSize() && j>=0){
+			if ((tabla->getTabla())[i][j] == szam){
 				db++;
 			}
 			else if (db != 5){
@@ -235,48 +200,8 @@ bool Jatek::isFinished() const{
 	return false;
 }
 
-void Jatek::resizeRight(){
-	size++;
-	int **ujtabla = new int*[size];
-	for (int i = 0; i < size; i++){
-		ujtabla[i] = new int[size];
-		for (int j = 0; j < size; j++){
-			ujtabla[i][j] = 0;
-		}
-	}
-
-	for (int i = 0; i < size - 1; i++){
-		for (int j = 0; j < size - 1; j++){
-			ujtabla[i][j] = tabla[i][j];
-		}
-		delete(tabla[i]);
-	}
-	delete tabla;
-	tabla = ujtabla;
-}
-
-void Jatek::resizeLeft(){
-	size++;
-	int **ujtabla = new int*[size];
-	for (int i = 0; i < size; i++){
-		ujtabla[i] = new int[size];
-		for (int j = 0; j < size; j++){
-			ujtabla[i][j] = 0;
-		}
-	}
-
-	for (int i = 0; i < size-1; i++){
-		for (int j = 0; j < size-1; j++){
-			ujtabla[i+1][j+1] = tabla[i][j];
-		}
-		delete(tabla[i]);
-	}
-	delete tabla;
-	tabla = ujtabla;
-}
-
 int Jatek::getResult(int x, int y,int diff){
-	tabla[x][y] = 1;
+	(tabla->getTabla())[x][y] = 1;
 	int tmpx;
 	int tmpy;
 	int db;
@@ -291,20 +216,20 @@ int Jatek::getResult(int x, int y,int diff){
 	if (isFinished()){
 		lastx[0] = tmpx;
 		lastx[1] = tmpy;
-		tabla[x][y] = 0;
+		(tabla->getTabla())[x][y] = 0;
 		return 5;
 	}
 	else{
 		db = 0;
 		int i = x;
 		int j = y;
-		while (i>0 && j>0 && tabla[i-1][j] == 1){
+		while (i>0 && j>0 && (tabla->getTabla())[i-1][j] == 1){
 			i--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == 1){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == 1){
 				db++;
 				i++;
 			}
@@ -315,7 +240,7 @@ int Jatek::getResult(int x, int y,int diff){
 					}
 					db = 0;
 				}
-				i = size;
+				i = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -328,13 +253,13 @@ int Jatek::getResult(int x, int y,int diff){
 		db = 0;
 		i = x;
 		j = y;
-		while (i>0 && j>0 && tabla[i][j-1] == 1){
+		while (i>0 && j>0 && (tabla->getTabla())[i][j-1] == 1){
 			j--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == 1){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == 1){
 				db++;
 				j++;
 			}
@@ -345,7 +270,7 @@ int Jatek::getResult(int x, int y,int diff){
 					}
 					db = 0;
 				}
-				j = size;
+				j = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -358,14 +283,14 @@ int Jatek::getResult(int x, int y,int diff){
 		db = 0;
 		i = x;
 		j = y;
-		while (i>0 && j>0 && tabla[i - 1][j - 1] == 1){
+		while (i>0 && j>0 && (tabla->getTabla())[i - 1][j - 1] == 1){
 			i--;
 			j--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == 1){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == 1){
 				db++;
 				i++;
 				j++;
@@ -377,8 +302,8 @@ int Jatek::getResult(int x, int y,int diff){
 					}
 					db = 0;
 				}
-				i = size;
-				j = size;
+				i = tabla->getSize();
+				j = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -391,12 +316,12 @@ int Jatek::getResult(int x, int y,int diff){
 		db = 0;
 		i = x;
 		j = y;
-		while (i>0 && i<size - 1 && j>0 && j<size - 1 && tabla[i - 1][j + 1] == 1){
+		while (i>0 && i<tabla->getSize() - 1 && j>0 && j<tabla->getSize() - 1 && (tabla->getTabla())[i - 1][j + 1] == 1){
 			i--;
 			j++;
 		}
-		while (db < 5 && i < size && j >= 0){
-			if (tabla[i][j] == 1){
+		while (db < 5 && i < tabla->getSize() && j >= 0){
+			if ((tabla->getTabla())[i][j] == 1){
 				db++;
 				i++;
 				j--;
@@ -408,8 +333,8 @@ int Jatek::getResult(int x, int y,int diff){
 					}
 					db = 0;
 				}
-				i = size;
-				j = size;
+				i = tabla->getSize();
+				j = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -419,7 +344,7 @@ int Jatek::getResult(int x, int y,int diff){
 	}
 	lastx[0] = tmpx;
 	lastx[1] = tmpy;
-	tabla[x][y] = 0;
+	(tabla->getTabla())[x][y] = 0;
 
 	if (diff == 2){
 		if (lasty[0] != -1) min = getDefence(x, y);
@@ -433,8 +358,8 @@ void Jatek::aiMove(int diff){
 	int max = 0;
 	int tmp;
 	int random;
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
+	for (int i = 0; i < tabla->getSize(); i++){
+		for (int j = 0; j < tabla->getSize(); j++){
 			if (isValidMove(i, j)){
 				tmp = getResult(i, j,diff);
 				if (tmp > max){
@@ -452,26 +377,26 @@ void Jatek::aiMove(int diff){
 			}
 		}
 	}
-	tabla[x][y] = 1;
+	(tabla->getTabla())[x][y] = 1;
 	lastx[0] = x;
 	lastx[1] = y;
 	//std::cout << lastx[0] << " " << lastx[1] << "\n";
 
 
-	if ((x == size - 1 || y == size - 1 )&& size<17){
-		resizeRight();
+	if ((x == tabla->getSize() - 1 || y == tabla->getSize() - 1 )&& tabla->getSize()<17){
+		tabla->resizeRight();
 	}
 
-	if ((x == 0 || y == 0) && size<17){
-		resizeLeft();
+	if ((x == 0 || y == 0) && tabla->getSize()<17){
+		tabla->resizeLeft();
 	}
 
-	setXkov();
+	tabla->setXkov();
 }
 
 
 int Jatek::getDefence(int x, int y){
-	tabla[x][y] = 2;
+	(tabla->getTabla())[x][y] = 2;
 	int tmpx;
 	int tmpy;
 	int db;
@@ -482,26 +407,26 @@ int Jatek::getDefence(int x, int y){
 	tmpy = lasty[1];
 	lasty[0] = x;
 	lasty[1] = y;
-	setXkov();
+	tabla->setXkov();
 
 	if (isFinished()){
 		lasty[0] = tmpx;
 		lasty[1] = tmpy;
-		tabla[x][y] = 0;
-		setXkov();
+		(tabla->getTabla())[x][y] = 0;
+		tabla->setXkov();
 		return 5;
 	}
 	else{
 		db = 0;
 		int i = x;
 		int j = y;
-		while (i>0 && j>0 && tabla[i - 1][j] == 2){
+		while (i>0 && j>0 && (tabla->getTabla())[i - 1][j] == 2){
 			i--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == 2){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == 2){
 				db++;
 				i++;
 			}
@@ -512,7 +437,7 @@ int Jatek::getDefence(int x, int y){
 					}
 					db = 0;
 				}
-				i = size;
+				i = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -525,13 +450,13 @@ int Jatek::getDefence(int x, int y){
 		db = 0;
 		i = x;
 		j = y;
-		while (i>0 && j>0 && tabla[i][j - 1] == 2){
+		while (i>0 && j>0 && (tabla->getTabla())[i][j - 1] == 2){
 			j--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == 2){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == 2){
 				db++;
 				j++;
 			}
@@ -542,7 +467,7 @@ int Jatek::getDefence(int x, int y){
 					}
 					db = 0;
 				}
-				j = size;
+				j = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -555,14 +480,14 @@ int Jatek::getDefence(int x, int y){
 		db = 0;
 		i = x;
 		j = y;
-		while (i>0 && j>0 && tabla[i - 1][j - 1] == 2){
+		while (i>0 && j>0 && (tabla->getTabla())[i - 1][j - 1] == 2){
 			i--;
 			j--;
 		}
 
 
-		while (db < 5 && i < size && j < size){
-			if (tabla[i][j] == 2){
+		while (db < 5 && i < tabla->getSize() && j < tabla->getSize()){
+			if ((tabla->getTabla())[i][j] == 2){
 				db++;
 				i++;
 				j++;
@@ -574,8 +499,8 @@ int Jatek::getDefence(int x, int y){
 					}
 					db = 0;
 				}
-				i = size;
-				j = size;
+				i = tabla->getSize();
+				j = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -588,12 +513,12 @@ int Jatek::getDefence(int x, int y){
 		db = 0;
 		i = x;
 		j = y;
-		while (i>0 && i<size - 1 && j>0 && j<size - 1 && tabla[i - 1][j + 1] == 2){
+		while (i>0 && i<tabla->getSize() - 1 && j>0 && j<tabla->getSize() - 1 && (tabla->getTabla())[i - 1][j + 1] == 2){
 			i--;
 			j++;
 		}
-		while (db < 5 && i < size && j >= 0){
-			if (tabla[i][j] == 2){
+		while (db < 5 && i < tabla->getSize() && j >= 0){
+			if ((tabla->getTabla())[i][j] == 2){
 				db++;
 				i++;
 				j--;
@@ -605,8 +530,8 @@ int Jatek::getDefence(int x, int y){
 					}
 					db = 0;
 				}
-				i = size;
-				j = size;
+				i = tabla->getSize();
+				j = tabla->getSize();
 			}
 		}
 		if (db > max){
@@ -616,8 +541,8 @@ int Jatek::getDefence(int x, int y){
 	}
 	lasty[0] = tmpx;
 	lasty[1] = tmpy;
-	tabla[x][y] = 0;
-	setXkov();
+	(tabla->getTabla())[x][y] = 0;
+	tabla->setXkov();
 	return max;
 }
 
@@ -625,4 +550,11 @@ Player* Jatek::getPlayer(int number)const {
 	if (number == 1) return p1;
 	else if (number == 2) return p2;
 	else return NULL;
+}
+
+bool Jatek::isXkov() const {
+	return tabla->isXkov();
+}
+void Jatek::setXkov() {
+	tabla->setXkov();
 }

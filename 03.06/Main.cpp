@@ -2,7 +2,6 @@
 #include "Ai_Easy.hpp"
 #include "Ai_Hard.hpp"
 #include "User.hpp"
-#include <vector>
 
 void menu();
 int tablameret();
@@ -11,20 +10,6 @@ bool PvP(int size);
 int nehezseg();
 
 int main(){
-	/*std::vector <Player *> lista;
-	User p = User();
-	Ai_Hard ai = Ai_Hard();
-	lista.push_back(&ai);
-	lista.push_back(&p);
-	
-	int *k=p.nextmove();
-	if (k) {
-		std::cout << (k[0]) << " " << (k[1]);
-	}
-	else {
-		std::cout << "Hiba";
-	}*/
-
 
 	menu();
 	return 0;
@@ -33,14 +18,11 @@ int main(){
 void menu(){
 	setlocale(LC_ALL, "");
 	system(CLEAR);
-	int x=0, y;
+	int x = 0;
 	bool ok = false;
 	bool good = false;
 	int size;
 	int diff;
-	clock_t wait;
-	clock_t wait2;
-
 
 	do{
 		std::cout << "5 in a row játék.\n\nVálasszon játékmódot!\nPvP: 1\nPvAI: 2\nExit: 3\n";
@@ -103,18 +85,20 @@ bool PvAi(int size,int diff){
 	bool good = false;
 	int x;
 	int y;
-	Jatek jatek(size);
-	clock_t wait;
-	clock_t wait2;
+	int *move = new int[2];
+	Jatek jatek;
+
+	if (diff == 1) {
+		jatek=Jatek(size,"PvAi",1);
+	}
+	else if (diff == 2) {
+		jatek=Jatek(size, "PvAi", 2);
+	}
+
 
 	jatek.fancyPrint();
 	while (!jatek.isGameOver() && !ok){
 		if (jatek.isXkov()) std::cout << "\nX következik: \n";
-		/*wait = clock();
-		wait2 = clock();
-		while (wait2 != wait + 1000){
-			wait2 = clock();
-		}*/
 		jatek.aiMove(diff);
 		system(CLEAR);
 		jatek.fancyPrint();
@@ -125,30 +109,16 @@ bool PvAi(int size,int diff){
 		else{
 			do{
 				std::cout << "\nO következik: ";
-				std::cin >> x;
-				if (std::cin.good()){
-					std::cin >> y;
-					if (std::cin.good()){
-						if (jatek.getMove(x, y)){
-							system(CLEAR);
-							jatek.fancyPrint();
-							if (jatek.isFinished()){
-								ok = true;
-								std::cout << "\nO nyert!!!\n";
-							}
-							good = true;
+				if (move = jatek.getPlayer(2)->nextmove()) {
+					if (jatek.getMove(move[0], move[1])) {
+						good = true;
+						system(CLEAR);
+						jatek.fancyPrint();
+						if (jatek.isFinished()) {
+							ok = true;
+							std::cout << "\nO nyert!!!\n";
 						}
 					}
-					else{
-						std::cin.clear();
-						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-						std::cout << "Csak egész szaám adható meg.\n";
-					}
-				}
-				else{
-					std::cin.clear();
-					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					std::cout << "Csak egész szám adható meg.\n";
 				}
 			} while (!good);
 			if (good) good = false;
@@ -169,9 +139,8 @@ bool PvP(int size){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	bool good = false;
 	int x;
-	int y;
 	int* move = new int[2];
-	Jatek jatek(size,"Pvp");
+	Jatek jatek(size,"Pvp",0);
 
 	jatek.fancyPrint();
 	while (!jatek.isGameOver() && !jatek.isFinished()){

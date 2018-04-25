@@ -6,7 +6,7 @@ class Ai_Easy : public Ai {
 	int* laststeps;
 public:
 	Ai_Easy();
-	int* nextmove() override;
+	int* nextmove()override;
 };
 
 #endif // !AI_HARD_HPP
