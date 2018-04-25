@@ -3,7 +3,8 @@
 #include "Player.hpp"
 
 class Ai : public Player{
-
+public:
+	Ai();
 };
 #endif // !AI_HPP
 

@@ -7,6 +7,7 @@
 #include <ctime>
 #include <limits>
 #include <locale>
+#include "User.hpp"
 
 #ifdef _WIN32
 #define CLEAR "cls"
@@ -20,12 +21,17 @@ class Jatek{
 	int lastx[2];
 	int lasty[2];
 	int size;
+	Player * p1;
+	Player * p2;
+
 
 
 public:
 	Jatek();
 	Jatek(int size);
+	Jatek(int size, std::string flag);
 	~Jatek();
+	Player* getPlayer(int number) const;
 	void print() const;
 	void fancyPrint() const;
 	bool getMove(int x, int y);

@@ -1,15 +1,10 @@
-﻿  Ai_Easy.cpp
-  Ai_Hard.cpp
-  Main.cpp
+﻿  Jatek.cpp
 c:\users\oliver\desktop\connect-5\03.06\jatek.hpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(36): warning C4101: 'wait2': unreferenced local variable
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(35): warning C4101: 'wait': unreferenced local variable
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(30): warning C4101: 'y': unreferenced local variable
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(102): warning C4101: 'wait2': unreferenced local variable
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(101): warning C4101: 'wait': unreferenced local variable
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(36): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(50): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(82): warning C4244: 'argument': conversion from 'double' to 'std::streamsize', possible loss of data
+c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(93): warning C4244: 'argument': conversion from 'double' to 'std::streamsize', possible loss of data
+  User.cpp
   Generating Code...
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(91): warning C4715: 'tablameret': not all control paths return a value
-c:\users\oliver\desktop\connect-5\03.06\main.cpp(236): warning C4715: 'nehezseg': not all control paths return a value
-c:\users\oliver\desktop\connect-5\03.06\ai_hard.cpp(8): warning C4172: returning address of local variable or temporary: test
-c:\users\oliver\desktop\connect-5\03.06\ai_easy.cpp(8): warning C4172: returning address of local variable or temporary: test
   03.06.vcxproj -> C:\Users\Oliver\Desktop\Connect-5\Debug\03.06.exe

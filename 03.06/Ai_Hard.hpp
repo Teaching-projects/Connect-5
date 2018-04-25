@@ -3,6 +3,7 @@
 #include "Ai.hpp"
 
 class Ai_Hard : public Ai{
+	int* laststeps;
 public:
 	Ai_Hard();
 	int* nextmove() override;

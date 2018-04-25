@@ -36,6 +36,27 @@ Jatek::Jatek(int size):size(size){
 	srand(time(NULL));
 }
 
+Jatek::Jatek(int size, std::string flag):size(size) {
+	tabla = new int*[size];
+	for (int i = 0; i < size; i++) {
+		tabla[i] = new int[size];
+	}
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			tabla[i][j] = 0;
+		}
+	}
+	xkov = true;
+	srand(time(NULL));
+
+	if (flag == "Pvp") {
+		p1 = new User;
+		p2 = new User;
+		p1->set_laststeps(-1, -1);
+		p2->set_laststeps(-1, -1);
+	}
+}
+
 Jatek::~Jatek(){
 	for (int i = 0; i < size; i++){
 		delete(tabla[i]);
@@ -77,14 +98,12 @@ bool Jatek::getMove(int x, int y){
 	if (isValidMove(x, y)){
 		if (isXkov()){
 			tabla[x][y] = 1;
-			lastx[0] = x;
-			lastx[1] = y;
+			p1->set_laststeps(x, y);
 			setXkov();
 		}
 		else{
 			tabla[x][y] = 2;
-			lasty[0] = x;
-			lasty[1] = y;
+			p2->set_laststeps(x, y);
 			setXkov();
 		}
 		if ((x == size - 1 || y == size - 1) && size<17){
@@ -130,13 +149,13 @@ bool Jatek::isFinished() const{
 	int db = 0;
 
 	if (isXkov()){
-		tmpx = lasty[0];
-		tmpy = lasty[1];
+		tmpx = (p2->get_laststeps())[0];
+		tmpy = (p2->get_laststeps())[1];
 		szam = 2;
 	}
 	else{
-		tmpx = lastx[0];
-		tmpy = lastx[1];
+		tmpx = (p1->get_laststeps())[0];
+		tmpy = (p1->get_laststeps())[1];
 		szam = 1;
 	}
 
@@ -600,4 +619,10 @@ int Jatek::getDefence(int x, int y){
 	tabla[x][y] = 0;
 	setXkov();
 	return max;
+}
+
+Player* Jatek::getPlayer(int number)const {
+	if (number == 1) return p1;
+	else if (number == 2) return p2;
+	else return NULL;
 }

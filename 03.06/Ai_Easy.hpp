@@ -3,6 +3,7 @@
 #include "Ai.hpp"
 
 class Ai_Easy : public Ai {
+	int* laststeps;
 public:
 	Ai_Easy();
 	int* nextmove() override;

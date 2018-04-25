@@ -1,6 +1,7 @@
 #ifndef USER_HPP
 #define USER_HPP
 #include "Player.hpp"
+#include <iostream>
 
 class User :public Player {
 public:
