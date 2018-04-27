@@ -11,6 +11,7 @@
 #include "Ai_Easy.hpp"
 #include "Ai_Hard.hpp"
 #include "Tabla.hpp"
+#include "CRT.h"
 
 
 #ifdef _WIN32

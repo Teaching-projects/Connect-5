@@ -300,3 +300,5 @@ int Ai_Hard::getDefence(int x, int y,Tabla* tabla,Player* p2) {
 	tabla->setXkov();
 	return max;
 }
+
+Ai_Hard::~Ai_Hard(){}

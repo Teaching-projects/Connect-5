@@ -44,9 +44,9 @@ void Tabla::resizeRight() {
 		for (int j = 0; j < size - 1; j++) {
 			ujtabla[i][j] = tabla[i][j];
 		}
-		delete(tabla[i]);
+		delete[] tabla[i];
 	}
-	delete tabla;
+	delete[] tabla;
 	tabla=ujtabla;
 }
 void Tabla::resizeLeft() {
@@ -63,9 +63,9 @@ void Tabla::resizeLeft() {
 		for (int j = 0; j < size - 1; j++) {
 			ujtabla[i + 1][j + 1] = tabla[i][j];
 		}
-		delete(tabla[i]);
+		delete[] tabla[i];
 	}
-	delete tabla;
+	delete[] tabla;
 	tabla=ujtabla;
 }
 
@@ -170,4 +170,11 @@ bool Tabla::isFinished(Player* p1, Player* p2) const {
 		}
 	}
 	return false;
+}
+
+Tabla::~Tabla() {
+	for (int i = 0; i < size; i++) {
+		delete[] tabla[i];
+	}
+	delete[] tabla;
 }

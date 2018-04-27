@@ -148,3 +148,5 @@ int Ai_Easy::getResult(int x, int y,Tabla* tabla,Player* p2) {
 
 	return max;
 }
+
+Ai_Easy::~Ai_Easy(){}

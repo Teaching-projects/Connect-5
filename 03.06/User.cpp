@@ -2,16 +2,14 @@
 
 User::User():Player(){}
 
-int* User::nextmove(){
+int* User::nextmove(int *move){
 	int x;
 	int y;
-	int *move;
 
 	std::cin >> x;
 	if (std::cin.good()) {
 		std::cin >> y;
 		if (std::cin.good()) {
-			move = new int[2];
 			move[0] = x;
 			move[1] = y;
 			return move;
@@ -31,6 +29,8 @@ int* User::nextmove(){
 	}
 }
 
-int* User::nextmove(Tabla* tabla,Player* p2) {
+int* User::nextmove(Tabla* tabla, Player* p2, int* move) {
 	return NULL;
 }
+
+User::~User() {}

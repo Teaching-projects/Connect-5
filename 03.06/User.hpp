@@ -2,12 +2,13 @@
 #define USER_HPP
 #include "Player.hpp"
 #include "Tabla.hpp"
-
+#include "CRT.h"
 class User :public Player {
 public:
 	User();
-	int* nextmove() override;
-	int* nextmove(Tabla* tabla,Player* p2) override;
+	~User();
+	int* nextmove(int* move) override;
+	int* nextmove(Tabla* tabla,Player* p2,int* move) override;
 };
 
 #endif // !USER_HPP

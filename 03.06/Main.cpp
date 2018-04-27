@@ -3,6 +3,10 @@
 #include "Ai_Hard.hpp"
 #include "User.hpp"
 
+#include "CRT.h"
+#include <stdlib.h>  
+
+
 void menu();
 int tablameret();
 bool PvAi(int size,int diff);
@@ -10,6 +14,8 @@ bool PvP(int size);
 int nehezseg();
 
 int main(){
+	//Memory Leak ellenõrzéshez.
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);	
 	menu();
 	return 0;
 }
@@ -96,7 +102,7 @@ bool PvAi(int size,int diff){
 	jatek->fancyPrint();
 	while (!jatek->isGameOver() && !ok){
 		if (jatek->isXkov()) std::cout << "\nX következik: \n";
-		if (move = jatek->getPlayer(1)->nextmove(jatek->getTabla(),jatek->getPlayer(2))) {
+		if (jatek->getPlayer(1)->nextmove(jatek->getTabla(),jatek->getPlayer(2),move)) {
 			if (jatek->getMove(move[0], move[1])) {
 				system(CLEAR);
 				jatek->fancyPrint();
@@ -109,7 +115,7 @@ bool PvAi(int size,int diff){
 		else{
 			do{
 				std::cout << "\nO következik: ";
-				if (move = jatek->getPlayer(2)->nextmove()) {
+				if (jatek->getPlayer(2)->nextmove(move)) {
 					if (jatek->getMove(move[0], move[1])) {
 						good = true;
 						system(CLEAR);
@@ -127,6 +133,8 @@ bool PvAi(int size,int diff){
 	std::cout << "\nSzeretne újat játszani?\nIgen: 1\nNem: 2\n";
 	std::cin >> x;
 	system(CLEAR);
+	delete move;
+	delete jatek;
 	if (std::cin.good()){
 		if (x == 1) return true;
 		else return false;
@@ -147,7 +155,7 @@ bool PvP(int size){
 		do{
 			if (jatek.isXkov()) { 
 				std::cout << "\nX következik: \n"; 
-				if (move=jatek.getPlayer(1)->nextmove()) {
+				if (jatek.getPlayer(1)->nextmove(move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
 					}
@@ -155,7 +163,7 @@ bool PvP(int size){
 			}
 			else {
 				std::cout << "\nO következik: \n";
-				if (move = jatek.getPlayer(2)->nextmove()) {
+				if (jatek.getPlayer(2)->nextmove(move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
 					}
@@ -173,6 +181,7 @@ bool PvP(int size){
 	std::cout << "\nSzeretne újat játszani?\nIgen: 1\nNem: 2\n";
 	std::cin >> x;
 	system(CLEAR);
+	delete move;
 	if (std::cin.good()){
 		if (x == 1) return true;
 		else return false;

@@ -1,6 +1,7 @@
 #ifndef TABLA_HPP
 #define TABLA_HPP
 #include "Player.hpp"
+#include "CRT.h"
 
 class Tabla {
 	int size;
@@ -8,6 +9,7 @@ class Tabla {
 	bool xkov;
 
 public:
+	~Tabla();
 	Tabla(int size);
 	bool isXkov() const;
 	void setXkov();

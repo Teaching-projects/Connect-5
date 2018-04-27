@@ -62,5 +62,8 @@
     <ClInclude Include="Tabla.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="CRT.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

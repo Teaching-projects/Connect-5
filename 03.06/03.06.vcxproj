@@ -153,6 +153,7 @@
     <ClInclude Include="Ai.hpp" />
     <ClInclude Include="Ai_Easy.hpp" />
     <ClInclude Include="Ai_Hard.hpp" />
+    <ClInclude Include="CRT.h" />
     <ClInclude Include="Jatek.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Tabla.hpp" />
