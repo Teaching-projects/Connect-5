@@ -1,7 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 #include <iostream>
-class Jatek;
+class Tabla;
 
 class Player {
 protected:
@@ -10,7 +10,7 @@ protected:
 public:
 	Player();
 	virtual int* nextmove()=0;
-	virtual int* nextmove(Jatek* jatek)=0;
+	virtual int* nextmove(Tabla* tabla,Player *p2)=0;
 	void set_laststeps(int x_, int y_);
 	int* get_laststeps()const;
 };

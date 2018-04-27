@@ -1,4 +1,5 @@
-﻿  Ai_Hard.cpp
+﻿  Main.cpp
 c:\users\oliver\desktop\connect-5\03.06\jatek.hpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\oliver\desktop\connect-5\03.06\jatek.hpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(78): warning C4715: 'tablameret': not all control paths return a value
+c:\users\oliver\desktop\connect-5\03.06\main.cpp(207): warning C4715: 'nehezseg': not all control paths return a value
   03.06.vcxproj -> C:\Users\Oliver\Desktop\Connect-5\Debug\03.06.exe

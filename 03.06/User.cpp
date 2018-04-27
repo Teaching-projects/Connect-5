@@ -1,8 +1,6 @@
 #include "User.hpp"
 
-User::User():Player(){
-
-}
+User::User():Player(){}
 
 int* User::nextmove(){
 	int x;
@@ -33,6 +31,6 @@ int* User::nextmove(){
 	}
 }
 
-int* User::nextmove(Jatek* jatek) {
+int* User::nextmove(Tabla* tabla,Player* p2) {
 	return NULL;
 }

@@ -39,9 +39,6 @@ public:
 	bool isValidMove(int x, int y) const;
 	bool isGameOver() const;
 	bool isFinished() const;
-	int getResult(int x, int y,int diff);
-	void aiMove(int diff);
-	int getDefence(int x, int y);
 	bool isXkov() const;
 	void setXkov();
 	Tabla* getTabla();

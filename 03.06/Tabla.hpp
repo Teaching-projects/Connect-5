@@ -1,5 +1,6 @@
 #ifndef TABLA_HPP
 #define TABLA_HPP
+#include "Player.hpp"
 
 class Tabla {
 	int size;
@@ -15,6 +16,8 @@ public:
 	void resizeRight();
 	void resizeLeft();
 	int getSize();
+	bool isValidMove(int x, int y) const;
+	bool isFinished(Player* p1,Player* p2) const;
 };
 
 #endif // !TABLA_HPP

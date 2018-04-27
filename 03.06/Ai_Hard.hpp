@@ -3,12 +3,10 @@
 #include "Ai.hpp"
 
 class Ai_Hard : public Ai{
-
 public:
 	Ai_Hard();
-	int* nextmove(Jatek* jatek);
-	int getResult(int x, int y, Jatek* jatek) override;
-	int getDefence(int x, int y,Jatek* jatek) ;
+	int getResult(int x, int y, Tabla* tabla, Player* p2) ;
+	int getDefence(int x, int y,Tabla* tabla, Player* p2) ;
 };
 
 #endif // !AI_HARD_HPP

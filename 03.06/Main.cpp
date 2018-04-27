@@ -10,18 +10,6 @@ bool PvP(int size);
 int nehezseg();
 
 int main(){
-	/*
-	Player* p1;
-	Player* p2;
-
-	p1 = new User;
-	p2 = new Ai_Easy;
-
-	std::cout<< (p1->get_laststeps())[0];
-	std::cout << (p1->get_laststeps())[0];
-	*/
-
-
 	menu();
 	return 0;
 }
@@ -95,7 +83,6 @@ bool PvAi(int size,int diff){
 	bool ok = false;
 	bool good = false;
 	int x;
-	int y;
 	int *move = new int[2];
 	Jatek *jatek;
 
@@ -109,7 +96,7 @@ bool PvAi(int size,int diff){
 	jatek->fancyPrint();
 	while (!jatek->isGameOver() && !ok){
 		if (jatek->isXkov()) std::cout << "\nX következik: \n";
-		if (move = jatek->getPlayer(1)->nextmove(jatek)) {
+		if (move = jatek->getPlayer(1)->nextmove(jatek->getTabla(),jatek->getPlayer(2))) {
 			if (jatek->getMove(move[0], move[1])) {
 				system(CLEAR);
 				jatek->fancyPrint();
@@ -176,6 +163,7 @@ bool PvP(int size){
 			}	
 		} while (!good);
 		if (good) good = false;
+		system("cls");
 		jatek.fancyPrint();
 	}
 	if (jatek.isFinished()){
