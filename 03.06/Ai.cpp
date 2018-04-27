@@ -31,8 +31,4 @@ int* Ai::nextmove(Tabla* tabla, Player* p2,int* move) {
 	return move;
 }
 
-int* Ai::nextmove(int* move) {
-	return NULL;
-}
-
 Ai::~Ai(){}

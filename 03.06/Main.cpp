@@ -115,7 +115,7 @@ bool PvAi(int size,int diff){
 		else{
 			do{
 				std::cout << "\nO következik: ";
-				if (jatek->getPlayer(2)->nextmove(move)) {
+				if (jatek->getPlayer(2)->nextmove(NULL,NULL,move)) {
 					if (jatek->getMove(move[0], move[1])) {
 						good = true;
 						system(CLEAR);
@@ -155,7 +155,7 @@ bool PvP(int size){
 		do{
 			if (jatek.isXkov()) { 
 				std::cout << "\nX következik: \n"; 
-				if (jatek.getPlayer(1)->nextmove(move)) {
+				if (jatek.getPlayer(1)->nextmove(NULL,NULL,move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
 					}
@@ -163,7 +163,7 @@ bool PvP(int size){
 			}
 			else {
 				std::cout << "\nO következik: \n";
-				if (jatek.getPlayer(2)->nextmove(move)) {
+				if (jatek.getPlayer(2)->nextmove(NULL,NULL,move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
 					}

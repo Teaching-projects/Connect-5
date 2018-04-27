@@ -2,7 +2,7 @@
 
 User::User():Player(){}
 
-int* User::nextmove(int *move){
+int* User::nextmove(Tabla* tabla, Player* p2, int* move){
 	int x;
 	int y;
 
@@ -27,10 +27,6 @@ int* User::nextmove(int *move){
 		std::cout << "Csak egész szám adható meg.\n";
 		return NULL;
 	}
-}
-
-int* User::nextmove(Tabla* tabla, Player* p2, int* move) {
-	return NULL;
 }
 
 User::~User() {}

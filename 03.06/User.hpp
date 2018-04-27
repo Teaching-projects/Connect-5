@@ -7,7 +7,6 @@ class User :public Player {
 public:
 	User();
 	~User();
-	int* nextmove(int* move) override;
 	int* nextmove(Tabla* tabla,Player* p2,int* move) override;
 };
 
