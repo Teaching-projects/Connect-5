@@ -32,3 +32,7 @@ int* User::nextmove(){
 		return NULL;
 	}
 }
+
+int* User::nextmove(Jatek* jatek) {
+	return NULL;
+}

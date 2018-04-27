@@ -1,11 +1,12 @@
 #ifndef AI_EASY_HPP
 #define AI_EASY_HPP
-#include "Player.hpp"
-
-class Ai_Easy : public Player {
+#include "Ai.hpp"
+#include "Jatek.hpp"
+class Ai_Easy : public Ai {
 public:
 	Ai_Easy();
-	int* nextmove()override;
+	int* nextmove(Jatek* jatek);
+	int getResult(int x, int y,Jatek* jatek) override;
 };
 
 #endif // !AI_HARD_HPP

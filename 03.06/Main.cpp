@@ -106,13 +106,15 @@ bool PvAi(int size,int diff){
 		jatek = new Jatek(size, "PvAi", 2);
 	}
 
-
 	jatek->fancyPrint();
 	while (!jatek->isGameOver() && !ok){
 		if (jatek->isXkov()) std::cout << "\nX következik: \n";
-		jatek->aiMove(diff);
-		system(CLEAR);
-		jatek->fancyPrint();
+		if (move = jatek->getPlayer(1)->nextmove(jatek)) {
+			if (jatek->getMove(move[0], move[1])) {
+				system(CLEAR);
+				jatek->fancyPrint();
+			}
+		}
 		if (jatek->isFinished()){
 			ok = true;
 			std::cout << "\nX nyert!!!\n";

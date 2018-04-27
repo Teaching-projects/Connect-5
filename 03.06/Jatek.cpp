@@ -563,6 +563,11 @@ Player* Jatek::getPlayer(int number)const {
 bool Jatek::isXkov() const {
 	return tabla->isXkov();
 }
+
 void Jatek::setXkov() {
 	tabla->setXkov();
+}
+
+Tabla* Jatek::getTabla() {
+	return tabla;
 }

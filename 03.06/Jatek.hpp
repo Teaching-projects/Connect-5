@@ -12,6 +12,7 @@
 #include "Ai_Hard.hpp"
 #include "Tabla.hpp"
 
+
 #ifdef _WIN32
 #define CLEAR "cls"
 #else //In any other OS
@@ -23,8 +24,8 @@ class Jatek{
 	int lastx[2];
 	int lasty[2];
 	int size;
-	Player * p1;
-	Player * p2;
+	Player* p1;
+	Player* p2;
 
 public:
 	Jatek();
@@ -43,5 +44,6 @@ public:
 	int getDefence(int x, int y);
 	bool isXkov() const;
 	void setXkov();
+	Tabla* getTabla();
 };
 #endif
