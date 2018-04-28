@@ -5,7 +5,6 @@
 class Tabla;
 
 class Player {
-protected:
 	int* arr;
 public:
 	virtual ~Player();

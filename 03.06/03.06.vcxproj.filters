@@ -39,6 +39,12 @@
     <ClCompile Include="Tabla.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Leaderboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jatek.hpp">
@@ -63,6 +69,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CRT.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entry.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Leaderboard.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

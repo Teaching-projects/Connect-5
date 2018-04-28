@@ -1,5 +1,5 @@
-#ifndef JATEK HPP
-#define JATEK HPP
+#ifndef JATEK_HPP
+#define JATEK_HPP
 
 #include <iostream>
 #include <iomanip>
@@ -12,13 +12,6 @@
 #include "Ai_Hard.hpp"
 #include "Tabla.hpp"
 #include "CRT.h"
-
-
-#ifdef _WIN32
-#define CLEAR "cls"
-#else //In any other OS
-#define CLEAR "clear"
-#endif
 
 class Jatek{
 	Tabla *tabla;
