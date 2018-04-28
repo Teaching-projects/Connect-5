@@ -151,7 +151,7 @@ bool PvAi(int size,int diff,int* winner){
 
 	jatek->fancyPrint();
 	while (!jatek->isGameOver() && !ok){
-		if (jatek->isXkov()) std::cout << "\nX következik: ";
+		if (jatek->isXkov()) std::cout << "\nX következik: \n";
 		if (jatek->getPlayer(1)->nextmove(jatek->getTabla(),jatek->getPlayer(2),move)) {
 			if (jatek->getMove(move[0], move[1])) {
 				system(CLEAR);
@@ -165,7 +165,7 @@ bool PvAi(int size,int diff,int* winner){
 		}
 		else{
 			do{
-				std::cout << "\nO következik: ";
+				std::cout << "\nO következik: \n";
 				if (jatek->getPlayer(2)->nextmove(NULL,NULL,move)) {
 					if (jatek->getMove(move[0], move[1])) {
 						good = true;
@@ -206,7 +206,7 @@ bool PvP(int size){
 	while (!jatek.isGameOver() && !jatek.isFinished()){
 		do{
 			if (jatek.isXkov()) { 
-				std::cout << "\nX következik: "; 
+				std::cout << "\nX következik: \n"; 
 				if (jatek.getPlayer(1)->nextmove(NULL,NULL,move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
@@ -214,7 +214,7 @@ bool PvP(int size){
 				}
 			}
 			else {
-				std::cout << "\nO következik: ";
+				std::cout << "\nO következik: \n";
 				if (jatek.getPlayer(2)->nextmove(NULL,NULL,move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
@@ -223,7 +223,7 @@ bool PvP(int size){
 			}	
 		} while (!good);
 		if (good) good = false;
-		system("cls");
+		system(CLEAR);
 		jatek.fancyPrint();
 	}
 	if (jatek.isFinished()){

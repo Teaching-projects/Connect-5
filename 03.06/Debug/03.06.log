@@ -1,17 +1,4 @@
-﻿  Ai.cpp
-  Ai_Easy.cpp
-  Ai_Hard.cpp
-  Jatek.cpp
-c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(9): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(64): warning C4244: 'argument': conversion from 'double' to 'std::streamsize', possible loss of data
-c:\users\oliver\desktop\connect-5\03.06\jatek.cpp(75): warning C4244: 'argument': conversion from 'double' to 'std::streamsize', possible loss of data
-  Main.cpp
-  Player.cpp
-  Tabla.cpp
-  User.cpp
-  Generating Code...
+﻿  Main.cpp
 c:\users\oliver\desktop\connect-5\03.06\main.cpp(134): warning C4715: 'tablameret': not all control paths return a value
 c:\users\oliver\desktop\connect-5\03.06\main.cpp(268): warning C4715: 'nehezseg': not all control paths return a value
   03.06.vcxproj -> C:\Users\Oliver\Desktop\Connect-5\Debug\03.06.exe
