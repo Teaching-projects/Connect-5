@@ -3,7 +3,7 @@
 Leaderboard::Leaderboard() {}
 
 Leaderboard::~Leaderboard() {
-	for (int i = 0; i < leaderboard.size(); i++) {
+	for (unsigned int i = 0; i < leaderboard.size(); i++) {
 		delete leaderboard.at(i);
 	}
 	leaderboard.clear();

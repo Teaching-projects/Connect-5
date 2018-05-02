@@ -13,7 +13,6 @@ void menu(){
 	system(CLEAR);
 	int x = 0;
 	bool ok = false;
-	bool good = false;
 	int size;
 	int diff;
 	std::string name;
@@ -131,6 +130,7 @@ int tablameret(){
 			}
 		}
 	} while (!ok);
+	return 0;
 }
 
 bool PvAi(int size,int diff,int* winner){
@@ -265,6 +265,7 @@ int nehezseg(){
 			}
 		}
 	} while (!ok);
+	return 0;
 }
 
 Leaderboard* fileBe() {

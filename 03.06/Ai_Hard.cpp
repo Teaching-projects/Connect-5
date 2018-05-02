@@ -158,7 +158,6 @@ int Ai_Hard::getDefence(int x, int y,Tabla* tabla,Player* p2) {
 	int tmpy;
 	int db;
 	int max = 0;
-	int min = 0;
 
 	tmpx = p2->get_laststeps()[0];
 	tmpy = p2->get_laststeps()[1];

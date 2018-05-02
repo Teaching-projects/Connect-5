@@ -14,10 +14,10 @@
 #include "CRT.h"
 
 class Jatek{
+	int size;
 	Tabla *tabla;
 	int lastx[2];
 	int lasty[2];
-	int size;
 	Player* p1;
 	Player* p2;
 

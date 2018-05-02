@@ -8,8 +8,6 @@ int Ai_Easy::getResult(int x, int y,Tabla* tabla,Player* p2) {
 	int tmpy;
 	int db;
 	int max = 0;
-	int min = 0;
-
 	
 	tmpx = (this->get_laststeps())[0];
 	tmpy = (this->get_laststeps())[1];
