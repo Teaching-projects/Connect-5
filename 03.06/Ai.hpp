@@ -8,7 +8,7 @@ class Ai : public Player{
 public:
 	~Ai();
 	Ai();
-	int* nextmove(Tabla* tabla, Player* p2,int* move);
+	step nextmove(Tabla* tabla, Player* p2);
 	virtual int getResult(int x, int y, Tabla* tabla, Player* p2)=0;
 };
 #endif // !AI_HPP

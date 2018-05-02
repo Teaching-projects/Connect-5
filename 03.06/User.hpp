@@ -8,7 +8,7 @@ class User :public Player {
 public:
 	User();
 	~User();
-	int* nextmove(Tabla* tabla,Player* p2,int* move) override;
+	step nextmove(Tabla* tabla,Player* p2) override;
 };
 
 #endif // !USER_HPP

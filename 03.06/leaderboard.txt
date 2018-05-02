@@ -2,8 +2,12 @@ RunnerMate	0:00	2
 Oliver	0:06	1
 Oliver	0:06	1
 Oliver	0:07	2
+oliver	0:07	2
 Oliver	0:08	1
+Joci	0:08	2
 Oliver	0:09	2
+Bela	0:09	2
+Oliver	0:10	2
 Oliver	0:15	2
 Oliver	0:59	1
 Oliver	1:00	1

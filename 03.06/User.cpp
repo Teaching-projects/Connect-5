@@ -2,7 +2,7 @@
 
 User::User():Player(){}
 
-int* User::nextmove(Tabla* tabla, Player* p2, int* move){
+step User::nextmove(Tabla* tabla, Player* p2){
 	int x;
 	int y;
 
@@ -10,22 +10,21 @@ int* User::nextmove(Tabla* tabla, Player* p2, int* move){
 	if (std::cin.good()) {
 		std::cin >> y;
 		if (std::cin.good()) {
-			move[0] = x;
-			move[1] = y;
-			return move;
+			set_laststeps(x, y);
+			return get_laststeps();
 		}
 		else {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "Csak egész szaám adható meg.\n";
-			return NULL;
+			return step();
 		}
 	}
 	else {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Csak egész szám adható meg.\n";
-		return NULL;
+		return step();
 	}
 }
 

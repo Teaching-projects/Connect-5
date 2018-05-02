@@ -9,8 +9,8 @@ int Ai_Easy::getResult(int x, int y,Tabla* tabla,Player* p2) {
 	int db;
 	int max = 0;
 	
-	tmpx = (this->get_laststeps())[0];
-	tmpy = (this->get_laststeps())[1];
+	tmpx = (this->get_laststeps()).x;
+	tmpy = (this->get_laststeps()).y;
 	this->set_laststeps(x, y);
 
 	if (tabla->isFinished(this,p2)) {

@@ -4,14 +4,20 @@
 #include "CRT.h"
 class Tabla;
 
+struct step {
+	int x;
+	int y;
+	step() :x(-1), y(-1) {};
+	step(int x, int y) :x(x), y(y) {};
+};
 class Player {
-	int* arr;
+	step l;
 public:
 	virtual ~Player();
 	Player();
-	virtual int* nextmove(Tabla* tabla,Player *p2,int* move)=0;
+	virtual step nextmove(Tabla* tabla,Player *p2)=0;
 	void set_laststeps(int x_, int y_);
-	int* get_laststeps()const;
+	step get_laststeps()const;
 };
 
 #endif

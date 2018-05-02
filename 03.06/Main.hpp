@@ -32,8 +32,6 @@ int tablameret();
 bool PvAi(int size, int diff, int* winner);
 bool PvP(int size);
 int nehezseg();
-Leaderboard* fileBe();
-void fileKi(Leaderboard* l);
 std::string getName();
 
 #endif

@@ -86,13 +86,13 @@ bool Tabla::isFinished(Player* p1, Player* p2) const {
 	int db = 0;
 
 	if (isXkov()) {
-		tmpx = (p2->get_laststeps())[0];
-		tmpy = (p2->get_laststeps())[1];
+		tmpx = (p2->get_laststeps()).x;
+		tmpy = (p2->get_laststeps()).y;
 		szam = 2;
 	}
 	else {
-		tmpx = (p1->get_laststeps())[0];
-		tmpy = (p1->get_laststeps())[1];
+		tmpx = (p1->get_laststeps()).x;
+		tmpy = (p1->get_laststeps()).y;
 		szam = 1;
 	}
 

@@ -12,8 +12,8 @@ int Ai_Hard::getResult(int x, int y, Tabla* tabla,Player* p2) {
 	int min = 0;
 
 
-	tmpx = (this->get_laststeps())[0];
-	tmpy = (this->get_laststeps())[1];
+	tmpx = (this->get_laststeps()).x;
+	tmpy = (this->get_laststeps()).y;
 	this->set_laststeps(x, y);
 
 	if (tabla->isFinished(this,p2)) {
@@ -147,7 +147,7 @@ int Ai_Hard::getResult(int x, int y, Tabla* tabla,Player* p2) {
 	this->set_laststeps(tmpx, tmpy);
 	(tabla->getTabla())[x][y] = 0;
 
-	if (p2->get_laststeps()[0] != -1) min = getDefence(x, y,tabla,p2);
+	if (p2->get_laststeps().x != -1) min = getDefence(x, y,tabla,p2);
 	if (min >= 4 && max < min) return min;
 	return max;
 }
@@ -159,8 +159,8 @@ int Ai_Hard::getDefence(int x, int y,Tabla* tabla,Player* p2) {
 	int db;
 	int max = 0;
 
-	tmpx = p2->get_laststeps()[0];
-	tmpy = p2->get_laststeps()[1];
+	tmpx = p2->get_laststeps().x;
+	tmpy = p2->get_laststeps().y;
 	p2->set_laststeps(x, y);
 
 	tabla->setXkov();

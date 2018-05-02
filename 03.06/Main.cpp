@@ -17,17 +17,13 @@ void menu(){
 	int diff;
 	std::string name;
 	Leaderboard* l;
-	clock_t start;
-	clock_t end;
+	int start;
+	int end;
 	double sec;
 	int* winner = new int;
 	std::string time;
 
-	l=fileBe();
-	if (!l) {
-		l = new Leaderboard;
-		std::cout << "A leaderboard fájl létre lett hozva." << std::endl;
-	}
+	l = new Leaderboard("leaderboard.txt");
 	l->sort();
 
 	do{
@@ -58,7 +54,7 @@ void menu(){
 				if (!PvAi(size,diff,winner)) ok = true;
 				end = clock();
 
-				if (*(winner)!=0) {
+				if (*(winner) != 0) {
 					std::cout << name << " nyert, felkerül a leaderboardra." << std::endl;
 					sec = (double)((end - start) / CLOCKS_PER_SEC);
 					time.append(std::to_string((int)(sec / 60)));
@@ -102,7 +98,7 @@ void menu(){
 	} while (!ok);
 	if (ok) ok = false;
 	l->sort();
-	fileKi(l);
+	l->fileKi();
 	delete l;
 	delete winner;
 }
@@ -139,8 +135,9 @@ bool PvAi(int size,int diff,int* winner){
 	bool ok = false;
 	bool good = false;
 	int x;
-	int *move = new int[2];
 	Jatek *jatek;
+
+	step move;
 
 	if (diff == 1) {
 		jatek=new Jatek(size,"PvAi",1);
@@ -152,8 +149,9 @@ bool PvAi(int size,int diff,int* winner){
 	jatek->fancyPrint();
 	while (!jatek->isGameOver() && !ok){
 		if (jatek->isXkov()) std::cout << "\nX következik: \n";
-		if (jatek->getPlayer(1)->nextmove(jatek->getTabla(),jatek->getPlayer(2),move)) {
-			if (jatek->getMove(move[0], move[1])) {
+		move = jatek->getPlayer(1)->nextmove(jatek->getTabla(), jatek->getPlayer(2));
+		if (move.x!=-1) {
+			if (jatek->getMove(move.x, move.y)) {
 				system(CLEAR);
 				jatek->fancyPrint();
 			}
@@ -166,8 +164,9 @@ bool PvAi(int size,int diff,int* winner){
 		else{
 			do{
 				std::cout << "\nO következik: \n";
-				if (jatek->getPlayer(2)->nextmove(NULL,NULL,move)) {
-					if (jatek->getMove(move[0], move[1])) {
+				move = jatek->getPlayer(2)->nextmove(NULL, NULL);
+				if (move.x!=-1) {
+					if (jatek->getMove(move.x, move.y)) {
 						good = true;
 						system(CLEAR);
 						jatek->fancyPrint();
@@ -185,7 +184,6 @@ bool PvAi(int size,int diff,int* winner){
 	std::cout << "\nSzeretne újat játszani?\nIgen: 1\nNem: 2" << std::endl;
 	std::cin >> x;
 	system(CLEAR);
-	delete move;
 	delete jatek;
 	if (std::cin.good()){
 		if (x == 1) return true;
@@ -199,24 +197,26 @@ bool PvP(int size){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	bool good = false;
 	int x;
-	int* move = new int[2];
 	Jatek jatek(size,"Pvp",0);
+	step move;
 
 	jatek.fancyPrint();
 	while (!jatek.isGameOver() && !jatek.isFinished()){
 		do{
 			if (jatek.isXkov()) { 
 				std::cout << "\nX következik: \n"; 
-				if (jatek.getPlayer(1)->nextmove(NULL,NULL,move)) {
-					if (jatek.getMove(move[0], move[1])) {
+				move = jatek.getPlayer(1)->nextmove(NULL, NULL);
+				if (move.x!=-1) {
+					if (jatek.getMove(move.x, move.y)) {
 						good = true;
 					}
 				}
 			}
 			else {
 				std::cout << "\nO következik: \n";
-				if (jatek.getPlayer(2)->nextmove(NULL,NULL,move)) {
-					if (jatek.getMove(move[0], move[1])) {
+				move = jatek.getPlayer(2)->nextmove(NULL, NULL);
+				if (move.x!=-1) {
+					if (jatek.getMove(move.x, move.y)) {
 						good = true;
 					}
 				}
@@ -233,7 +233,6 @@ bool PvP(int size){
 	std::cout << "\nSzeretne újat játszani?\nIgen: 1\nNem: 2\n";
 	std::cin >> x;
 	system(CLEAR);
-	delete move;
 	if (std::cin.good()){
 		if (x == 1) return true;
 		else return false;
@@ -266,56 +265,6 @@ int nehezseg(){
 		}
 	} while (!ok);
 	return 0;
-}
-
-Leaderboard* fileBe() {
-	std::string name;
-	std::string time;
-	std::string diff;
-	int db=0;
-	int i = 0;
-
-	std::ifstream file;
-	Leaderboard* l = new Leaderboard;
-
-	file.open("leaderboard.txt");
-	if (file.is_open()) {
-		while (getline(file, name)) {
-			db++;
-		}
-		file.close();
-		file.open("leaderboard.txt");
-
-		while (i<db) {
-			getline(file, name, '\t');
-			getline(file, time, '\t');
-			getline(file, diff, '\n');
-
-			Entry* e = new Entry(name, time, std::stoi(diff, NULL, 10));
-			l->addEntry(e);
-			i++;
-		}
-		return l;
-	}
-	else {
-		std::cout << "A leaderboard fájl nem nyitható meg." << std::endl;
-		return NULL;
-	}
-}
-
-void fileKi(Leaderboard* l) {
-	std::ofstream file;
-	file.open("leaderboard.txt");
-
-	for (int i = 0; i < l->getSize(); i++) {
-		file << l->getLeaderboard().at(i)->getName();
-		file << "\t";
-		file << l->getLeaderboard().at(i)->getTime();
-		file << "\t";		
-		file << l->getLeaderboard().at(i)->getDiff();
-		file << "\n";
-	}
-	file.close();
 }
 
 std::string getName() {

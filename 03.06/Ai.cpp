@@ -2,7 +2,7 @@
 
 Ai::Ai():Player(){}
 
-int* Ai::nextmove(Tabla* tabla, Player* p2,int* move) {
+step Ai::nextmove(Tabla* tabla, Player* p2) {
 	int x, y;
 	int max = 0;
 	int tmp;
@@ -26,9 +26,8 @@ int* Ai::nextmove(Tabla* tabla, Player* p2,int* move) {
 			}
 		}
 	}
-	move[0] = x;
-	move[1] = y;
-	return move;
+	set_laststeps(x, y);
+	return get_laststeps();
 }
 
 Ai::~Ai(){}
