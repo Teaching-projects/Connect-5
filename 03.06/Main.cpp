@@ -1,7 +1,7 @@
 #include "Main.hpp"
 
 int main(){
-	//Memory Leak ellenırzÈshez.
+	//Memory Leak ellen≈ërz√©shez.
 	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);	
 	
 	menu();
@@ -27,21 +27,21 @@ void menu(){
 	l=fileBe();
 	if (!l) {
 		l = new Leaderboard;
-		std::cout << "A leaderboard f·jl lÈtre lett hozva." << std::endl;
+		std::cout << "A leaderboard f√°jl l√©tre lett hozva." << std::endl;
 	}
 	l->sort();
 
 	do{
-		std::cout << "5 in a row j·tÈk.\n\nV·lasszon j·tÈkmÛdot!\nPvP: 1\nPvAI: 2\nLeaderboard: 3\nExit: 4" << std::endl;
+		std::cout << "5 in a row j√°t√©k.\n\nV√°lasszon j√°t√©km√≥dot!\nPvP: 1\nPvAI: 2\nLeaderboard: 3\nExit: 4" << std::endl;
 		std::cin >> x;
 		if (std::cin.fail()){
-			std::cout << "Csak 1 Ès 4 kˆzˆtti sz·m elfogadott." << std::endl;
+			std::cout << "Csak 1 √©s 4 k√∂z√∂tti sz√°m elfogadott." << std::endl;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		else{
 			if (x != 2 && x != 1 && x!=3 && x!=4){
-				std::cout << "Csak 1 Ès 4 kˆzˆtti sz·m elfogadott." << std::endl;
+				std::cout << "Csak 1 √©s 4 k√∂z√∂tti sz√°m elfogadott." << std::endl;
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
@@ -60,7 +60,7 @@ void menu(){
 				end = clock();
 
 				if (*(winner)!=0) {
-					std::cout << name << " nyert, felker¸l a leaderboardra." << std::endl;
+					std::cout << name << " nyert, felker√ºl a leaderboardra." << std::endl;
 					sec = (double)((end - start) / CLOCKS_PER_SEC);
 					time.append(std::to_string((int)(sec / 60)));
 					time.append(":");
@@ -74,24 +74,24 @@ void menu(){
 			}
 			else if (x == 3) {
 				if (l->getSize() == 0) {
-					std::cout << "A Leaderboard ¸res." << std::endl;
-					std::cout << "A visszalÈpÈshez nyomjon meg egy gombot."<<std::endl;
+					std::cout << "A Leaderboard √ºres." << std::endl;
+					std::cout << "A visszal√©p√©shez nyomjon meg egy gombot."<<std::endl;
 					std::cin.clear();
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					std::cin.get();
 					system(CLEAR);
 				}
 				else {
-					if (l->getSize() < 10) std::cout << "A TOP " << l->getSize() << " j·tÈkos:" << std::endl;
-					else std::cout << "A TOP 10 j·tÈkos:" << std::endl;
+					if (l->getSize() < 10) std::cout << "A TOP " << l->getSize() << " j√°t√©kos:" << std::endl;
+					else std::cout << "A TOP 10 j√°t√©kos:" << std::endl;
 					std::cout << std::endl;
 					for (int i = 0; i < 10 && i < l->getSize(); i++) {
-						std::cout << "NÈv:\t" << l->getLeaderboard().at(i)->getName() << " ,Idı:\t" << l->getLeaderboard().at(i)->getTime() << ", NehÈzsÈg:\t";
-						if (l->getLeaderboard().at(i)->getDiff() == 1) std::cout << "Kˆnny˚" << std::endl;
-						else std::cout << "NehÈz" << std::endl;
+						std::cout << "N√©v:\t" << l->getLeaderboard().at(i)->getName() << " ,Id≈ë:\t" << l->getLeaderboard().at(i)->getTime() << ", Neh√©zs√©g:\t";
+						if (l->getLeaderboard().at(i)->getDiff() == 1) std::cout << "K√∂nny≈±" << std::endl;
+						else std::cout << "Neh√©z" << std::endl;
 					}
 					std::cout << std::endl;
-					std::cout << "A visszalÈpÈshez nyomjon meg egy gombot." << std::endl;
+					std::cout << "A visszal√©p√©shez nyomjon meg egy gombot." << std::endl;
 					std::cin.clear();
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					std::cin.get();
@@ -111,17 +111,17 @@ void menu(){
 int tablameret(){
 	int x=0;
 	bool ok = false;
-	std::cout << "Adja meg a t·bla kÌv·nt kezdeti mÈretÈt.(8-10)\nA p·lya kÈsıbb dinamikusan nıni fog." << std::endl;
+	std::cout << "Adja meg a t√°bla k√≠v√°nt kezdeti m√©ret√©t.(8-10)\nA p√°lya k√©s≈ëbb dinamikusan n≈ëni fog." << std::endl;
 	do{
 
 		if (!(std::cin >> x)){
-			std::cout << "Csak egÈsz sz·m elfogadott." << std::endl;
+			std::cout << "Csak eg√©sz sz√°m elfogadott." << std::endl;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		else{
 			if (x<8 || x>10){
-				std::cout << "Csak 8 Ès 10 kˆzˆtti kezdıÈrtÈk adhatÛ meg." << std::endl;
+				std::cout << "Csak 8 √©s 10 k√∂z√∂tti kezd≈ë√©rt√©k adhat√≥ meg." << std::endl;
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
@@ -151,7 +151,7 @@ bool PvAi(int size,int diff,int* winner){
 
 	jatek->fancyPrint();
 	while (!jatek->isGameOver() && !ok){
-		if (jatek->isXkov()) std::cout << "\nX kˆvetkezik: \n";
+		if (jatek->isXkov()) std::cout << "\nX k√∂vetkezik: \n";
 		if (jatek->getPlayer(1)->nextmove(jatek->getTabla(),jatek->getPlayer(2),move)) {
 			if (jatek->getMove(move[0], move[1])) {
 				system(CLEAR);
@@ -165,7 +165,7 @@ bool PvAi(int size,int diff,int* winner){
 		}
 		else{
 			do{
-				std::cout << "\nO kˆvetkezik: \n";
+				std::cout << "\nO k√∂vetkezik: \n";
 				if (jatek->getPlayer(2)->nextmove(NULL,NULL,move)) {
 					if (jatek->getMove(move[0], move[1])) {
 						good = true;
@@ -182,7 +182,7 @@ bool PvAi(int size,int diff,int* winner){
 			if (good) good = false;
 		}
 	}
-	std::cout << "\nSzeretne ˙jat j·tszani?\nIgen: 1\nNem: 2" << std::endl;
+	std::cout << "\nSzeretne √∫jat j√°tszani?\nIgen: 1\nNem: 2" << std::endl;
 	std::cin >> x;
 	system(CLEAR);
 	delete move;
@@ -206,7 +206,7 @@ bool PvP(int size){
 	while (!jatek.isGameOver() && !jatek.isFinished()){
 		do{
 			if (jatek.isXkov()) { 
-				std::cout << "\nX kˆvetkezik: \n"; 
+				std::cout << "\nX k√∂vetkezik: \n"; 
 				if (jatek.getPlayer(1)->nextmove(NULL,NULL,move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
@@ -214,7 +214,7 @@ bool PvP(int size){
 				}
 			}
 			else {
-				std::cout << "\nO kˆvetkezik: \n";
+				std::cout << "\nO k√∂vetkezik: \n";
 				if (jatek.getPlayer(2)->nextmove(NULL,NULL,move)) {
 					if (jatek.getMove(move[0], move[1])) {
 						good = true;
@@ -230,7 +230,7 @@ bool PvP(int size){
 		if (!jatek.isXkov()) std::cout << "\nX nyert!" << std::endl;
 		else std::cout << "\nO nyert!\n";
 	}
-	std::cout << "\nSzeretne ˙jat j·tszani?\nIgen: 1\nNem: 2\n";
+	std::cout << "\nSzeretne √∫jat j√°tszani?\nIgen: 1\nNem: 2\n";
 	std::cin >> x;
 	system(CLEAR);
 	delete move;
@@ -246,16 +246,16 @@ int nehezseg(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int x = 0;
 	bool ok = false;
-	std::cout << "Adja meg a kÌv·nt nehÈzsÈgi szintet!\nKˆnny˚: 1\nNehÈz: 2\n";
+	std::cout << "Adja meg a k√≠v√°nt neh√©zs√©gi szintet!\nK√∂nny≈±: 1\nNeh√©z: 2\n";
 	do{
 		if (!(std::cin >> x)){
-			std::cout << "Csak egÈsz sz·m elfogadott." << std::endl;
+			std::cout << "Csak eg√©sz sz√°m elfogadott." << std::endl;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		else{
 			if (x!=1 && x!=2){
-				std::cout << "Csak 1 Ès 2 adhatÛ meg." << std::endl;
+				std::cout << "Csak 1 √©s 2 adhat√≥ meg." << std::endl;
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
@@ -297,7 +297,7 @@ Leaderboard* fileBe() {
 		return l;
 	}
 	else {
-		std::cout << "A leaderboard f·jl nem nyithatÛ meg." << std::endl;
+		std::cout << "A leaderboard f√°jl nem nyithat√≥ meg." << std::endl;
 		return NULL;
 	}
 }
@@ -319,7 +319,7 @@ void fileKi(Leaderboard* l) {
 
 std::string getName() {
 	std::string name;
-	std::cout << "Adja meg a nevÈt: ";
+	std::cout << "Adja meg a nev√©t: ";
 	std::cin >> name;
 
 	return name;
